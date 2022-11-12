@@ -1,7 +1,10 @@
 # Python program to create a simple GUI
 # Simple Quiz using Tkinter
 
+#import json to use json file for data
+# and import messagebox as mb from tkinter
 #import everything from tkinter
+
 from tkinter import *
 
 # and import messagebox as mb from tkinter
@@ -64,6 +67,17 @@ class Quiz:
 		# Shows a message box to display the result
 		mb.showinfo("Result", f"{result}\n{correct}\n{wrong}")
 
+		con = mysql.connector.connect(host="localhost", user="root",password="", database="quiz")
+		# create cursor object
+		cursor = con.cursor()
+  
+		# assign data query0
+		query1 = "CREATE TABLE IF NOT EXISTS result(SCORE,CORRECT,WRONG)"
+		query2 = "INSERT INTO result(SCORE, CORRECT, WRONG) VALUES ("+str(score)+","+str(self.correct)+","+str(wrong_count)+")"
+		# executing cursor
+		cursor.execute(query2)
+		con.commit()
+  
 
 	# This method checks the Answer after we click on Next.
 	def check_ans(self, q_no):
@@ -209,7 +223,7 @@ gui.geometry("800x450")
 gui.title("Krish's Quiz")
 
 # get the data from the json file
-with open('data.json') as f:
+with open ('Quiz-using-Tkinter/data.json') as f:
 	data = json.load(f)
 
 # set the question, options, and answer
