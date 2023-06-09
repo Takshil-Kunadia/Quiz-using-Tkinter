@@ -220,7 +220,7 @@ gui = Tk()
 gui.geometry("800x450")
 
 # set the title of the Window
-gui.title("Krish's Quiz")
+gui.title("My Quiz")
 
 # get the data from the json file
 with open ('Quiz-using-Tkinter/data.json') as f:
